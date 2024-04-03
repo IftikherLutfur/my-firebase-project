@@ -39,10 +39,15 @@ const Navbar = () => {
             </NavLink>
 			</li>
 			<li className="flex">
-			<NavLink to='in'>
+			<NavLink to='/in'>
 			<button className="self-center px-8 py-3 rounded">Sign in</button>
             </NavLink>
 			</li>
+			{user && <li className="flex">
+			<NavLink to='/order'>
+			<button className="self-center px-8 py-3 rounded">Order</button>
+            </NavLink>
+			</li>}
 		</ul>
 		<div className="items-center flex-shrink-0 hidden lg:flex">
 

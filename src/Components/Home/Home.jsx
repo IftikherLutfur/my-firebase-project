@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../AuthProvider/AuthProvider";
+import { NavLink } from "react-router-dom";
 
 const Home = () => {
 
@@ -91,6 +92,7 @@ const Home = () => {
         <div className="form-control mt-6">
           <button className="btn btn-primary">Register</button>
         </div>
+        <span>Already have account ? <NavLink to='/in'><a href="">Login</a></NavLink></span>
       </form>
     </div>
   </div>

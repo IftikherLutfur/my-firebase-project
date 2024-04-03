@@ -12,6 +12,8 @@ import Home from './Components/Home/Home';
 import Login from './Components/Login/Login';
 import HomePage from './Components/HomePage/HomePage';
 import AuthProvider from './Components/AuthProvider/AuthProvider';
+import Order from './Components/Order/Order';
+import Private from './Routes/Private';
 
 const router = createBrowserRouter([
   {
@@ -29,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: '/in',
         element: <Login></Login>
+      },
+      {
+        path:'/order',
+        element: <Private><Order></Order></Private> 
       }
     ]
   },
