@@ -1,6 +1,22 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { Link, NavLink } from "react-router-dom";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Navbar = () => {
+
+
+	const { user, logOut } = useContext(AuthContext)
+
+
+	const handleLogOut = () =>{
+		logOut()
+		.then(()=>alert("Logout successful"))
+		.catch(error =>{
+			console.log(error);
+		})
+	}
+
+
     return (
         <div>
             <header className="p-4 dark:bg-gray-100 dark:text-gray-800">
@@ -13,25 +29,32 @@ const Navbar = () => {
 		</a>
 		<ul className="items-stretch hidden space-x-3 lg:flex">
 			<li className="flex">
-				<a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border- dark:text-violet-600 dark:border-violet-600">Link</a>
+				<button>
+			<NavLink to='/'>Home</NavLink>
+				</button>
 			</li>
 			<li className="flex">
-				<a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-">Link</a>
+			<NavLink to='/up'>
+			<button className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-600 dark:text-gray-50">Sign up</button>
+            </NavLink>
 			</li>
 			<li className="flex">
-				<a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-">Link</a>
-			</li>
-			<li className="flex">
-				<a rel="noopener noreferrer" href="#" className="flex items-center px-4 -mb-1 border-b-2 dark:border-">Link</a>
+			<NavLink to='in'>
+			<button className="self-center px-8 py-3 rounded">Sign in</button>
+            </NavLink>
 			</li>
 		</ul>
 		<div className="items-center flex-shrink-0 hidden lg:flex">
-            <NavLink to='/up'>
-			<button className="self-center px-8 py-3 font-semibold rounded dark:bg-violet-600 dark:text-gray-50">Sign up</button>
-            </NavLink>
-            <NavLink to='in'>
-			<button className="self-center px-8 py-3 rounded">Sign in</button>
-            </NavLink>
+
+			{
+				user ?
+				<>{user.email}
+				<button onClick={handleLogOut} className="btn btn-sm">LogOut</button>
+				</>
+				: 
+				<button className=" btn bg-orange-500 underline"><Link to='/in'>Login</Link></button>
+			}
+           
 
 		</div>
 		<button className="p-4 lg:hidden">

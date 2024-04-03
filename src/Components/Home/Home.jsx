@@ -1,18 +1,32 @@
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
 
 const Home = () => {
+
+	const {createUser} = useContext(AuthContext)
+    
+
 
 	const handleSubmit = e =>{
 		e.preventDefault();
 		const name = e.target.name.value;
 		const email = e.target.email.value;
 		const password = e.target.password.value;
-		const confirmPassword = e.target.confirmPassword.value;
-		console.log(name, email, password, confirmPassword); 
+		// const confirmPassword = e.target.confirmPassword.value;
+		console.log(name, email, password); 
 
-		if(password !== confirmPassword){
-			alert("Password dose not match")
-			return;
-		}
+		createUser(email,password)
+		.then(result =>{
+			console.log(result)
+		})
+		.catch(error=>{
+			console.log(error);
+		})
+
+		// if(password !== confirmPassword){
+		// 	alert("Password dose not match")
+		// 	return;
+		// }
 	}
 
 
@@ -66,17 +80,14 @@ const Home = () => {
         </div>
 
 
-        <div className="form-control">
+        {/* <div className="form-control">
           <label className="label">
             <span className="label-text">Confirm Password</span>
           </label>
           <input
 		name="confirmPassword" 
 		type="password" placeholder="password" className="input input-bordered" required />
-          {/* <label className="label">
-            <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
-          </label> */}
-        </div>
+        </div> */}
         <div className="form-control mt-6">
           <button className="btn btn-primary">Register</button>
         </div>

@@ -1,13 +1,28 @@
+import { useContext } from "react";
+import { AuthContext } from "../AuthProvider/AuthProvider";
+
+
 const Login = () => {
 
+  const {signInUser} = useContext(AuthContext)
 
-    const handleSubmit = e =>{
+   
+    const handleSubmitForLogin = e =>{
 		e.preventDefault();
 		// const name = e.target.name.value;
 		const email = e.target.email.value;
 		const password = e.target.password.value;
 		// const confirmPassword = e.target.confirmPassword.value;
 		console.log(email,password); 
+
+    signInUser(email,password)
+    .then(result=>{
+      console.log(result.user)
+    })
+    .catch(error=>{
+      console.log(error);
+    })
+
 	}
 
 
@@ -19,7 +34,7 @@ const Login = () => {
       <h1 className="text-5xl font-bold">Login!</h1>
     </div>
     <div className="card shrink-0 w-full max-w-sm shadow-2xl bg-base-100">
-      <form onSubmit={handleSubmit} className="card-body">
+      <form onSubmit={handleSubmitForLogin} className="card-body">
         <div className="form-control">
           <label className="label">
             <span className="label-text">Email</span>
@@ -32,19 +47,21 @@ const Login = () => {
 		placeholder="email" 
 		className="input input-bordered" required />
         </div>
+
         <div className="form-control">
           <label className="label">
             <span className="label-text">Password</span>
           </label>
           <input
 		name="password" 
-		type="password" placeholder="password" className="input input-bordered" required />
+		type="password" 
+    placeholder="password" className="input input-bordered" required />
           <label className="label">
             <a href="#" className="label-text-alt link link-hover">Forgot password?</a>
           </label>
         </div>
         <div className="form-control mt-6">
-          <button className="btn btn-primary">Register</button>
+          <button className="btn btn-primary">Login</button>
         </div>
       </form>
     </div>
